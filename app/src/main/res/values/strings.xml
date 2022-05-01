@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Számítógép összeállító és összehasonlító</string>
+    <string name="bejelentkezes">Bejelentkezés</string>
+    <string name="regisztracio">Regisztráció</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="admin">Admin</string>
+    <string name="passwordAgain">Jelszó mégegyszer</string>
+    <string name="Cancel">Mégsem</string>
+    <string name="emailRegexPattern">^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$</string>
+</resources>
