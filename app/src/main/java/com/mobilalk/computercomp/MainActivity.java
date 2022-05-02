@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
-    private static final int SECRETKEY = 99;
+    private static final int SECRETKEY = 1000;
     private SharedPreferences preferences;
 
 

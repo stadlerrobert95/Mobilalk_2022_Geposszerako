@@ -3,6 +3,7 @@ package com.mobilalk.computercomp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
     private static final String LOG_TAG = RegisterActivity.class.getName();
+    private static final int SECRETKEY = 1001;
     private SharedPreferences preferences;
     EditText editTextEmail, editTextPassword, editTextPasswordAgain;
     String username, email, password, passwordAgain;
@@ -28,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         Bundle extrasBundle = getIntent().getExtras();
         int secretkey = extrasBundle.getInt("SECRETKEY");
 
-        if (secretkey != 99) {
+        if (secretkey != 1000) {
             finish();
         }
 
@@ -74,9 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() >= 6 & password.equals(passwordAgain) & validateEmail(email)){
             Log.i(LOG_TAG, String.format("Email: %s Password: %s PasswordAgain: %s %s", email, password, passwordAgain, username));
             msg.append("Sikeres regisztráció!");
-            finish();
+            startBuilder();
         }
         toaster(msg);
+
     }
 
     private void toaster(CharSequence message) {
@@ -89,6 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean validateEmail(String email){
         return Pattern.compile(getString(R.string.emailRegexPattern)).matcher(email).matches();
+    }
+
+    private void startBuilder(/**/){
+        Intent intent = new Intent(this, BuilderActivity.class);
+        intent.putExtra("SECRETKEY", SECRETKEY);
+
+        startActivity(intent);
     }
 
     @Override
