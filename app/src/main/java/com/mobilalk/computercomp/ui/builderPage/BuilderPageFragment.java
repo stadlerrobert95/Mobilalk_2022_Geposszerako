@@ -1,4 +1,4 @@
-package com.mobilalk.computercomp.ui.gallery;
+package com.mobilalk.computercomp.ui.builderPage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.mobilalk.computercomp.databinding.FragmentGalleryBinding;
+import com.mobilalk.computercomp.databinding.FragmentBuilderBinding;
 
-public class GalleryFragment extends Fragment {
+public class BuilderPageFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentBuilderBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        BuilderPageViewModel builderPageViewModel =
+                new ViewModelProvider(this).get(BuilderPageViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentBuilderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        builderPageViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

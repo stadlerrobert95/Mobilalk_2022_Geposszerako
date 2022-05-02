@@ -1,7 +1,5 @@
 package com.mobilalk.computercomp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,13 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
     private static final String LOG_TAG = RegisterActivity.class.getName();
-    private static final int SECRETKEY = 1001;
+    private static final int SECRETKEY = 1000;
     private SharedPreferences preferences;
     EditText editTextEmail, editTextPassword, editTextPasswordAgain;
     String username, email, password, passwordAgain;
@@ -120,7 +120,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email", email);
+        editor.putString("username", username);
+        editor.apply();
         super.onPause();
+
     }
 
     @Override

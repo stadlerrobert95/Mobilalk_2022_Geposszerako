@@ -1,4 +1,4 @@
-package com.mobilalk.computercomp.ui.slideshow;
+package com.mobilalk.computercomp.ui.comparePage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.mobilalk.computercomp.databinding.FragmentSlideshowBinding;
+import com.mobilalk.computercomp.databinding.FragmentCompareBinding;
 
-public class SlideshowFragment extends Fragment {
+public class CompareFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentCompareBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        CompareViewModel compareViewModel =
+                new ViewModelProvider(this).get(CompareViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentCompareBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        compareViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.mobilalk.computercomp.ui.gallery.GalleryFragment"
+        android:name="com.mobilalk.computercomp.ui.builderPage.BuilderPageFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_Builder" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.mobilalk.computercomp.ui.slideshow.SlideshowFragment"
+        android:name="com.mobilalk.computercomp.ui.comparePage.CompareFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_compare" />
 </navigation>

@@ -1,16 +1,16 @@
-package com.mobilalk.computercomp.ui.gallery;
+package com.mobilalk.computercomp.ui.builderPage;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class BuilderPageViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public BuilderPageViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is Builder fragment");
     }
 
     public LiveData<String> getText() {
