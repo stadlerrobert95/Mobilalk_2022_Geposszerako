@@ -19,4 +19,7 @@
     <string name="menu_home">Főoldal</string>
     <string name="menu_gallery">Gépösszerakó</string>
     <string name="menu_slideshow">Gépösszehasonlító</string>
+    <string name="spinnerMotherboard">Alaplap</string>
+    <string name="loginGuest">Bejelentkezés vendégként</string>
+    <string name="loginGoogle">Google bejelentkezés</string>
 </resources>

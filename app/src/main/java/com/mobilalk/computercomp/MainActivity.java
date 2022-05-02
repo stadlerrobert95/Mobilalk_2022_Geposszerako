@@ -1,13 +1,13 @@
 package com.mobilalk.computercomp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(registerIntent);
     }
+    
+    public void loginAsGuest(View view) {
+    }
+
+    public void loginWithGoogle(View view) {
+    }
 
     @Override
     protected void onStart() {
@@ -79,4 +85,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
 }
