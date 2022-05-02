@@ -1,8 +1,7 @@
 package com.mobilalk.computercomp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,15 +9,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
     private static final String LOG_TAG = RegisterActivity.class.getName();
+    private static final int SECRETKEY = 1000;
     private SharedPreferences preferences;
     EditText editTextEmail, editTextPassword, editTextPasswordAgain;
     String username, email, password, passwordAgain;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         Bundle extrasBundle = getIntent().getExtras();
         int secretkey = extrasBundle.getInt("SECRETKEY");
 
-        if (secretkey != 99) {
+        if (secretkey != 1000) {
             finish();
         }
 
@@ -37,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPasswordAgain = findViewById(R.id.editTextRegisterPasswordAgain);
 
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void cancel(View view) {
@@ -74,9 +86,21 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() >= 6 & password.equals(passwordAgain) & validateEmail(email)){
             Log.i(LOG_TAG, String.format("Email: %s Password: %s PasswordAgain: %s %s", email, password, passwordAgain, username));
             msg.append("Sikeres regisztráció!");
-            finish();
         }
         toaster(msg);
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    startBuilder();
+                } else {
+                    msg.append("Sikertelen regisztráció!");
+                    toaster(msg);
+                }
+            }
+        });
+
     }
 
     private void toaster(CharSequence message) {
@@ -89,6 +113,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean validateEmail(String email){
         return Pattern.compile(getString(R.string.emailRegexPattern)).matcher(email).matches();
+    }
+
+    private void startBuilder(/**/){
+        Intent intent = new Intent(this, BuilderActivity.class);
+        intent.putExtra("SECRETKEY", SECRETKEY);
+        startActivity(intent);
     }
 
     @Override
@@ -110,7 +140,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email", email);
+        editor.putString("username", username);
+        editor.apply();
         super.onPause();
+
     }
 
     @Override

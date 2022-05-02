@@ -4,8 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout-land/activity_main.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/activity_builder.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/activity_register.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/app_bar_builder.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/content_builder.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/fragment_builder.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/fragment_compare.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/fragment_gallery.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/fragment_home.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/fragment_slideshow.xml" value="0.36096014492753625" />
+        <entry key="..\:/AndroidStudioProjects/ComputerComp/app/src/main/res/layout/nav_header_builder.xml" value="0.36096014492753625" />
       </map>
     </option>
   </component>

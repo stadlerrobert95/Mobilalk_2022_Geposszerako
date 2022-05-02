@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:onClick="login"
-            android:text="@string/bejelentkezes" />
+            android:text="@string/bejelentkezes"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/buttonRegister"
@@ -33,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:onClick="register"
-            android:text="@string/regisztracio" />
+            android:text="@string/regisztracio"
+            tools:ignore="UsingOnClickInXml" />
 
     </LinearLayout>
 
@@ -73,11 +75,33 @@
         android:id="@+id/switchAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
         android:minHeight="48dp"
         android:text="@string/admin"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginGoogle" />
+
+    <Button
+        android:id="@+id/buttonLoginGuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/loginGuest"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:onClick="loginAsGuest"
+        tools:ignore="UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/buttonLoginGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/loginGoogle"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/buttonLoginGuest"
+        android:onClick="loginWithGoogle"
+        tools:ignore="UsingOnClickInXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
