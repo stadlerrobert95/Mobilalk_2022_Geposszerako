@@ -9,7 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
@@ -21,6 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     EditText editTextEmail, editTextPassword, editTextPasswordAgain;
     String username, email, password, passwordAgain;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPasswordAgain = findViewById(R.id.editTextRegisterPasswordAgain);
 
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void cancel(View view) {
@@ -76,9 +86,20 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() >= 6 & password.equals(passwordAgain) & validateEmail(email)){
             Log.i(LOG_TAG, String.format("Email: %s Password: %s PasswordAgain: %s %s", email, password, passwordAgain, username));
             msg.append("Sikeres regisztráció!");
-            startBuilder();
         }
         toaster(msg);
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    startBuilder();
+                } else {
+                    msg.append("Sikertelen regisztráció!");
+                    toaster(msg);
+                }
+            }
+        });
 
     }
 
@@ -97,7 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void startBuilder(/**/){
         Intent intent = new Intent(this, BuilderActivity.class);
         intent.putExtra("SECRETKEY", SECRETKEY);
-
         startActivity(intent);
     }
 

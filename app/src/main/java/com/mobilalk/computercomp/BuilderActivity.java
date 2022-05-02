@@ -14,6 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobilalk.computercomp.databinding.ActivityBuilderBinding;
 
 public class BuilderActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class BuilderActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityBuilderBinding binding;
     private SharedPreferences preferences;
+    private FirebaseUser firebaseUser;
 
     TextView textViewUsername, textViewEmail;
     String username, email;
@@ -31,6 +34,11 @@ public class BuilderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser == null){
+            finish();
+        }
 
         binding = ActivityBuilderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,6 +50,8 @@ public class BuilderActivity extends AppCompatActivity {
         textViewEmail = headerView.findViewById(R.id.loggedInEmail);
 
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+
 
         setSupportActionBar(binding.appBarBuilder.toolbar);
 
