@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void startBuilder(/**/){
-        Intent intent = new Intent(this, BuilderActivity.class);
+        Intent intent = new Intent(this, PartListActivity.class);
         intent.putExtra("SECRETKEY", SECRETKEY);
         startActivity(intent);
     }
