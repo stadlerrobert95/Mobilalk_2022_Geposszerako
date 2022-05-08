@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -17,11 +16,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -44,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTitle(getResources().getString(R.string.mainActivityName));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-
+        msg.delete(0,msg.length());
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
@@ -83,20 +81,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void firebaseAuthWithGoogle(String idToken){
+        msg.delete(0,msg.length());
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            msg.append("Sikeres bejelentkezés!");
-                            toaster(msg);
-                            startBuilder();
-                        } else {
-                            msg.append("Sikertelen bejelentkezés!");
-                            toaster(msg);
-                        }
-                    }
-                }
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()){
+                msg.append("Sikeres bejelentkezés!");
+                toaster(msg);
+                startBuilder();
+            } else {
+                msg.append("Sikertelen bejelentkezés!");
+                toaster(msg);
+            }
+        }
         );
     }
 
@@ -106,19 +102,16 @@ public class MainActivity extends AppCompatActivity {
         String stringPassword = editTextPassword.getText().toString();
         boolean isAdmin = switchAdmin.isChecked();
         Log.i(LOG_TAG, String.format("Bejelentkezett: %s jelszó: %s Admin: %b", stringUsername, stringPassword, isAdmin));
-
-        mAuth.signInWithEmailAndPassword(stringUsername,stringPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    msg.append("Sikeres bejelentkezés!");
-                    toaster(msg);
-                    setUsername(editTextUserName.getText().toString());
-                    startBuilder();
-                } else {
-                    msg.append("Sikertelen bejelentkezés!");
-                    toaster(msg);
-                }
+        msg.delete(0,msg.length());
+        mAuth.signInWithEmailAndPassword(stringUsername,stringPassword).addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()){
+                msg.append("Sikeres bejelentkezés!");
+                toaster(msg);
+                setUsername(editTextUserName.getText().toString());
+                startBuilder();
+            } else {
+                msg.append("Sikertelen bejelentkezés!");
+                toaster(msg);
             }
         }
         );
@@ -134,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startBuilder(/**/){
-        Intent intent = new Intent(this, BuilderActivity.class);
+        Intent intent = new Intent(this, PartListActivity.class);
         intent.putExtra("SECRETKEY", SECRETKEY);
         startActivity(intent);
     }
@@ -147,19 +140,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginAsGuest(View view) {
-        mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    msg.append("Anonim bejelentkezés sikeres!");
-                    toaster(msg);
-                    editTextUserName.setText("Anonymous");
-                    setUsername("Anonymous");
-                    startBuilder();
-                } else {
-                    msg.append("Sikertelen bejelentkezés!");
-                    toaster(msg);
-                }
+        msg.delete(0,msg.length());
+        mAuth.signInAnonymously().addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()){
+                msg.append("Anonim bejelentkezés sikeres!");
+                toaster(msg);
+                editTextUserName.setText("Anonymous");
+                setUsername("Anonymous");
+                startBuilder();
+            } else {
+                msg.append("Sikertelen bejelentkezés!");
+                toaster(msg);
             }
         });
     }

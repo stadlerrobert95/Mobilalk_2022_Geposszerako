@@ -22,4 +22,31 @@
     <string name="spinnerMotherboard">Alaplap</string>
     <string name="loginGuest">Bejelentkezés vendégként</string>
     <string name="loginGoogle">Google bejelentkezés</string>
+    <string name="sszehasonlitoba">Összehasonlítóba</string>
+    <string name="peldaszoveg">Peldaszoveg</string>
+    <string name="mainActivityName">Bejelentkezés</string>
+
+    <string-array name="part_name_list">
+        <item>MSI B450 TOMAHAWK MAX</item>
+        <item>MSI B550 TOMAHAWK MAX</item>
+        <item>Gigabyte RTX 3090 Ti Gaming OC</item>
+        <item>Sapphire RX 6800XT </item>
+        <item>Kingston HyperX 16GB 2666Mhz</item>
+    </string-array>
+
+    <string-array name="part_type">
+        <item>Alaplap</item>
+        <item>Alaplap</item>
+        <item>VGA</item>
+        <item>VGA</item>
+        <item>RAM</item>
+    </string-array>
+
+    <string-array name="part_weblink">
+        <item>https://www.msi.com/Motherboard/B450-TOMAHAWK-MAX</item>
+        <item>https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK</item>
+        <item>https://www.gigabyte.com/Graphics-Card/GV-N309TGAMING-OC-24GD#kf</item>
+        <item>https://www.sapphiretech.com/en/consumer/nitro-radeon-rx-6800-xt-16g-gddr6</item>
+        <item>https://www.kingston.com/dataSheets/HX426C16FB3_16.pdf</item>
+    </string-array>
 </resources>
